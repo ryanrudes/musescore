@@ -1,0 +1,6 @@
+cairosvg
+cairocffi
+requests
+tqdm
+bs4
+selenium

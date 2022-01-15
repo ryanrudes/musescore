@@ -1,0 +1,10 @@
+LICENSE
+README.md
+pyproject.toml
+setup.cfg
+src/musescore/__init__.py
+src/musescore/musescore.py
+src/musescore_ryanrudes.egg-info/PKG-INFO
+src/musescore_ryanrudes.egg-info/SOURCES.txt
+src/musescore_ryanrudes.egg-info/dependency_links.txt
+src/musescore_ryanrudes.egg-info/top_level.txt
