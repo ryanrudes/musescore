@@ -2,6 +2,13 @@
 
 This is a tool for scraping sheet music from [musescore.com](https://musescore.com).
 
+## Installation
+
+Installation with pip is as simple as this:
+```
+pip install musescore
+```
+
 ## Example
 
 ```python
