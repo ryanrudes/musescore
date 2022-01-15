@@ -1,0 +1,41 @@
+Metadata-Version: 2.1
+Name: musescore
+Version: 0.0.1
+Summary: A tool for scraping sheet music from musescore.
+Home-page: https://github.com/ryanrudes/musescore
+Author: Ryan Rudes
+Author-email: ryanrudes@gmail.com
+License: UNKNOWN
+Project-URL: Bug Tracker, https://github.com/ryanrudes/musescore/issues
+Platform: UNKNOWN
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.6
+Description-Content-Type: text/markdown
+License-File: LICENSE
+
+# Musescore Sheet Music Download Tool
+
+This is a tool for scraping sheet music from [musescore.com](https://musescore.com).
+
+## Installation
+
+Installation with pip is as simple as this:
+```
+pip install musescore
+```
+
+## Example
+
+```python
+import musescore
+
+user  = 2170606
+score = 5044504
+dpi   = 40
+
+musescore.download(user = user, score = score, dpi = dpi)
+```
+
+

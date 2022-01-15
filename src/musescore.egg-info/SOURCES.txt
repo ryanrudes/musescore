@@ -1,0 +1,10 @@
+LICENSE
+README.md
+pyproject.toml
+setup.cfg
+src/musescore/__init__.py
+src/musescore/musescore.py
+src/musescore.egg-info/PKG-INFO
+src/musescore.egg-info/SOURCES.txt
+src/musescore.egg-info/dependency_links.txt
+src/musescore.egg-info/top_level.txt
