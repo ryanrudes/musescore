@@ -14,6 +14,7 @@ from tqdm import tqdm
 import threading
 import cairocffi
 import requests
+import cairo
 import json
 import time
 import os
@@ -29,7 +30,11 @@ def download(user: Optional[Union[int, str]] = None,
         nonlocal results, pbar
         resp = requests.get(src, stream = True)
         data = resp.content
-        surf = PDFSurface(Tree(bytestring = data), None, dpi)
+        try:
+            surf = PDFSurface(Tree(bytestring = data), None, dpi)
+        except:
+            surf = cairo.ImageSurface.create_from_png(BytesIO(data))
+
         results[src] = surf
         pbar.update(1)
 
