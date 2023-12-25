@@ -1,6 +1,7 @@
 from selenium.webdriver.common.keys import Keys
 from selenium import webdriver
 from bs4 import BeautifulSoup
+from selenium.webdriver.common.by import By
 
 from cairosvg.surface import PDFSurface
 from cairosvg.parser import Tree
@@ -14,7 +15,6 @@ from tqdm import tqdm
 import threading
 import cairocffi
 import requests
-import cairo
 import json
 import time
 import os
@@ -30,11 +30,7 @@ def download(user: Optional[Union[int, str]] = None,
         nonlocal results, pbar
         resp = requests.get(src, stream = True)
         data = resp.content
-        try:
-            surf = PDFSurface(Tree(bytestring = data), None, dpi)
-        except:
-            surf = cairo.ImageSurface.create_from_png(BytesIO(data))
-
+        surf = PDFSurface(Tree(bytestring = data), None, dpi)
         results[src] = surf
         pbar.update(1)
 
@@ -66,14 +62,15 @@ def download(user: Optional[Union[int, str]] = None,
 
         while True:
             try:
-                title = driver.find_element_by_class_name('_3ke60').text
-                pages = len(driver.find_element_by_class_name('JQKO_').find_elements_by_xpath("*")) - 2
+                title = driver.find_element(By.CLASS_NAME, 'nFRPI').text
+                pages = len(driver.find_elements(By.CLASS_NAME, 'EEnGW'))
                 fpath = os.path.join('scores', title + '.pdf')
                 break
             except KeyboardInterrupt:
                 break
             except Exception as e:
                 time.sleep(0.1)
+                print(e)
                 continue
 
         surface = cairocffi.PDFSurface(fpath, 1, 1)
@@ -83,12 +80,12 @@ def download(user: Optional[Union[int, str]] = None,
         pbar = tqdm(desc = 'Fetching URLs to svg image of each page in score', total = pages, leave = False)
 
         for page in range(pages):
-            driver.execute_script(f'document.getElementsByClassName("vAVs3")[{page}].scrollIntoView()')
-            sheet = driver.find_elements_by_class_name('vAVs3')[page]
+            driver.execute_script(f'document.getElementsByClassName("EEnGW")[{page}].scrollIntoView()')
+            sheet = driver.find_elements(By.CLASS_NAME, 'EEnGW')[page]
 
             while True:
                 try:
-                    src = sheet.find_elements_by_xpath("*")[0].get_attribute('src')
+                    src = sheet.find_elements(By.XPATH, "*")[0].get_attribute('src')
 
                     if src is None:
                         continue
